@@ -1,0 +1,48 @@
+<!--on vérifie si le pokemon a été trouvé-->
+<div *ngIf="poke" class="row">
+    <div class="col s12 m10 offset-m1">
+    <h2 class="header center">{{ poke.name }}</h2>
+    <div class="card horizontal hoverable">
+      <div class="card-image">
+        <img [src]="poke.picture">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          <table class="bordered striped">
+            <tbody>
+              <tr>
+                <td>Nom</td>
+                <td><strong>{{ poke.name }}</strong></td>
+              </tr>
+              <tr>
+                <td>Points de vie</td>
+                <td><strong>{{ poke.hp }}</strong></td>
+              </tr>
+              <tr>
+                <td>Dégâts</td>
+                <td><strong>{{ poke.cp }}</strong></td>
+              </tr>
+              <tr>
+                <td>Types</td>
+                <td>
+                  <span *ngFor="let type of poke.types" class="{{ type | pokemonTypeColor }}">{{ type }}</span>
+                </td>
+              </tr>
+              <tr>
+                <td>Date de création</td>
+                <td><em>{{ poke.created | date:"d MMM yyyy" }}</em></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-action waves-effect">
+          <a (click)="goBack()">Retour</a>
+          <a (click)="goToEdit(poke)">Editer</a>
+          <a (click)="deletePokemon(poke)">Supprimer</a>
+        </div> 
+      </div>
+    </div>
+    </div>
+    </div>
+    <!--Si le pokemon n'a pas été trouvé on affiche un message d'erreur-->
+    <h4 *ngIf='!poke' class="center">Aucun pokémon à afficher !</h4>
